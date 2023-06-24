@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const { deterministicPartitionKey } = require("./dpk");
+const { deterministicPartitionKey, MAX_PARTITION_KEY_LENGTH } = require("./dpk");
 
 const getsHashOf = (data)=> crypto.createHash("sha3-512").update(data).digest("hex");
 
@@ -28,8 +28,7 @@ describe("deterministicPartitionKey", () => {
     expect(trivialKey).toBe(getsHashOf(JSON.stringify(event)))
   })
   it("Returns hashed event.partitionkey", ()=>{
-    const event = { partitionKey: 'x'.repeat(256*10)  }
-    console.log(event)
+    const event = { partitionKey: 'x'.repeat(MAX_PARTITION_KEY_LENGTH*10)  }
     const trivialKey = deterministicPartitionKey(event)
     expect(trivialKey).toBe(getsHashOf(event.partitionKey))
   })
