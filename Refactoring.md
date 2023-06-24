@@ -23,3 +23,5 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 6. The candidate.length checking also didnt make sense to be on if(event) scope since if there is no event.partitionKey, we already stringify and create a hash of the event, so I moved it to event.partitionKey scope as well.
 
 7. I decided to create a new function called `getCandidateFrom` receiving `partitionKey` as parameter to isolate the deterministic partition key logic implemented on the `event.partionKey`
+
+8. I removed the let candidate variable and returned the result of the function in the conditions itself
