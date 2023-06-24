@@ -9,3 +9,11 @@ You've been asked to refactor the function `deterministicPartitionKey` in [`dpk.
 You will be graded on the exhaustiveness and quality of your unit tests, the depth of your refactor, and the level of insight into your thought process provided by the written explanation.
 
 ## Your Explanation Here
+
+1. Firstly I added unity tests to cover the function. To do that I analysed all the conditions(ifs) in the code and created a test case for each.
+
+2. I created a coverage script so I could confirm that my tests were covering all the code.
+
+3. I realized that there was no need for checking if candidate !== "string" if event doesnt existed once the default value of the candidate for such case is the TRIVIAL_PARTITION_KEY="0", so I moved this code to inside if(event) code block.
+
+4. I realized the the candidate length checking also didnt make sense to be outside the if (event) code block once the TRIVIAL_PARTITION_KEY is "0" and it will always be smaller in size than MAX_PARTITION_KEY_LENGTH(256).
