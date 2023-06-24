@@ -17,3 +17,7 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 3. I realized that there was no need for checking if candidate !== "string" if event doesnt existed once the default value of the candidate for such case is the TRIVIAL_PARTITION_KEY="0", so I moved this code to inside if(event) code block.
 
 4. I realized the the candidate length checking also didnt make sense to be outside the if (event) code block once the TRIVIAL_PARTITION_KEY is "0" and it will always be smaller in size than MAX_PARTITION_KEY_LENGTH(256).
+
+5. Reading the code again, I also realized that the candidate typeof string checking didnt make sense to be in the global scope of the if(event) code block because if event doesnt have a partition key, the event is already going to be stringified, so I moved it to if(event.partitionKey) scope.
+
+6. The candidate.length checking also didnt make sense to be on if(event) scope since if there is no event.partitionKey, we already stringify and create a hash of the event, so I moved it to event.partitionKey scope as well.
