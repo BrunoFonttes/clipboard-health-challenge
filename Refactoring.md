@@ -21,3 +21,5 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 5. Reading the code again, I also realized that the candidate typeof string checking didnt make sense to be in the global scope of the if(event) code block because if event doesnt have a partition key, the event is already going to be stringified, so I moved it to if(event.partitionKey) scope.
 
 6. The candidate.length checking also didnt make sense to be on if(event) scope since if there is no event.partitionKey, we already stringify and create a hash of the event, so I moved it to event.partitionKey scope as well.
+
+7. I decided to create a new function called `getCandidateFrom` receiving `partitionKey` as parameter to isolate the deterministic partition key logic implemented on the `event.partionKey`
