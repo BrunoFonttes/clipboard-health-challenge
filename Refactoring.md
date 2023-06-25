@@ -25,3 +25,5 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 7. I decided to create a new function called `getCandidateFrom` receiving `partitionKey` as parameter to isolate the deterministic partition key logic implemented on the `event.partionKey`
 
 8. I removed the let candidate variable and returned the result of the function in the conditions itself
+
+9. I created the `createHash` function so I could make it more easy to call on the main code(twice in case)
