@@ -29,3 +29,7 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 9. I created the `createHash` function so I could make it more easy to call on the main code(twice in case)
 
 10. I replaced some if/else conditions in the code by ternary operators so the reading could get more concise and easier to read.
+
+11. Despite the code being very small at step 10, it was not readable as much as it could be, at least in my opinion, so I decide to write a little bit more to achieve that by removing the ternary operators, creating the auxiliar function `getStringCandidate` and replacing the if(event) from the end of `deterministicPartitionKey` with if(!event) at the beginning.
+
+
