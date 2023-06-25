@@ -15,8 +15,8 @@ const getStringCandidate = (partitionKey) => {
   return partitionKey
 }
 
-const getCandidateFrom = (partitionKey) => {
-  const strCandidate = getStringCandidate(partitionKey)
+const getPartitionKeyFrom = ({ candidate }) => {
+  const strCandidate = getStringCandidate(candidate)
 
   if (strCandidate.length > MAX_PARTITION_KEY_LENGTH) {
     return createHash(strCandidate)
@@ -29,8 +29,10 @@ const deterministicPartitionKey = (event) => {
     return TRIVIAL_PARTITION_KEY;
   }
 
-  if (event.partitionKey) {
-    return getCandidateFrom(event.partitionKey)
+  const candidate = event.partitionKey
+
+  if (candidate) {
+    return getPartitionKeyFrom({ candidate })
   }
 
   return createHash(JSON.stringify(event));
