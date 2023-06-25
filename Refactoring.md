@@ -27,3 +27,5 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 8. I removed the let candidate variable and returned the result of the function in the conditions itself
 
 9. I created the `createHash` function so I could make it more easy to call on the main code(twice in case)
+
+10. I replaced some if/else conditions in the code by ternary operators so the reading could get more concise and easier to read.

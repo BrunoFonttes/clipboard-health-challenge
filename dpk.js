@@ -9,24 +9,19 @@ const createHash = (candidate) => crypto
   .digest("hex");
 
 
-const getCandidateFrom = ({ partitionKey }) => {
-  let candidate = partitionKey
-  if (typeof partitionKey !== "string") {
-    candidate = JSON.stringify(partitionKey);
-  }
-  if (candidate.length > MAX_PARTITION_KEY_LENGTH) {
-    candidate = createHash(candidate);
-  }
-  return candidate
+const getCandidateFrom = (partitionKey) => {
+  const candidate = typeof partitionKey !== "string" ?
+    JSON.stringify(partitionKey) : partitionKey
+
+  return candidate.length > MAX_PARTITION_KEY_LENGTH ?
+    createHash(candidate) : candidate;
 };
 
 const deterministicPartitionKey = (event) => {
   if (event) {
-    if (event.partitionKey) {
-      return getCandidateFrom({ partitionKey: event.partitionKey })
-    } else {
-      return createHash(JSON.stringify(event));
-    }
+    return event.partitionKey ?
+      getCandidateFrom(event.partitionKey) :
+      createHash(JSON.stringify(event));
   }
   return TRIVIAL_PARTITION_KEY;
 };
